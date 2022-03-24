@@ -1,4 +1,5 @@
 import React from 'react';
+import AddIcon from '@/assets/add-symbol.svg?component';
 export default function AddNewTier({
     newTierInput,
     setTierData,
@@ -14,7 +15,8 @@ export default function AddNewTier({
                 if (
                     !tierData
                         .map((x) => x.value.toLowerCase())
-                        .includes(newTierInput.toLowerCase())
+                        .includes(newTierInput.toLowerCase()) &&
+                    newTierInput
                 ) {
                     setTierData([
                         ...tierData,
@@ -35,9 +37,15 @@ export default function AddNewTier({
                     placeholder='New Tier'
                     value={newTierInput}
                     onChange={(e) => setNewTierInput(e.target.value)}
+                    className='h-16 rounded-md focus:border-indigo-600'
                 />
-                <button className='rounded-md bg-indigo-700 text-white p-6 font-bold'>
-                    Go
+                <button className='rounded-md bg-indigo-700 text-white h-16 w-16 flex justify-center items-center font-bold'>
+                    <AddIcon
+                        style={{
+                            height: '40%',
+                            fill: '#FFFFFF',
+                        }}
+                    />
                 </button>
             </div>
         </form>

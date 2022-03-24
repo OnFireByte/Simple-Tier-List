@@ -27,7 +27,7 @@ export default function AddNewItem({
                     placeholder='New Item'
                     value={newValInput}
                     onChange={(e) => setNewValInput(e.target.value)}
-                    className=''
+                    className='h-16 rounded-md focus:border-indigo-600'
                 />
                 <button
                     type='submit'

@@ -1,6 +1,7 @@
 import Item from '@/components/Item';
 import React from 'react';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
+import AddIcon from '@/assets/add-symbol.svg?component';
 export default function Tier({
     tierData,
     index,
@@ -20,11 +21,11 @@ export default function Tier({
                     ref={provided.innerRef}
                     className='p-1'
                 >
-                    <div className='p-1 rounded-lg bg-gray-200 w-full flex flex-row items-center'>
+                    <div className='p-1 drop-shadow-lg rounded-lg bg-gray-200 w-full flex flex-row items-center'>
                         <div
                             {...provided.dragHandleProps}
                             style={{ backgroundColor: tierData.color }}
-                            className='group relative flex justify-center items-center p-1 mr-1 h-20 w-20 rounded-md'
+                            className='group text-2xl font-bold text-black drop-shadow-md text-sh relative flex justify-center items-center p-1 mr-1 h-20 w-20 rounded-md'
                         >
                             {tierData.value}
                             <div
@@ -33,7 +34,12 @@ export default function Tier({
                                     onDeleteTier(tierData.value);
                                 }}
                             >
-                                x
+                                <AddIcon
+                                    style={{
+                                        transform: 'rotate(45deg)',
+                                        height: '60%',
+                                    }}
+                                />
                             </div>
                         </div>
 
@@ -46,7 +52,7 @@ export default function Tier({
                         >
                             {(provided) => (
                                 <div
-                                    className='px-1 w-full min-h-[5rem] transition-all rounded-md bg-red-200 flex items-center'
+                                    className='px-1 w-full min-h-[5rem] transition-all rounded-md bg-gray-300 flex items-center'
                                     ref={provided.innerRef}
                                     {...provided.droppableProps}
                                 >

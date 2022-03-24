@@ -14,7 +14,7 @@ export default function Home() {
         { value: 'S', color: '#dc2626' },
         { value: 'A', color: '#ea580c' },
         { value: 'B', color: '#facc15' },
-        { value: 'C', color: '#facc15' },
+        { value: 'C', color: '#f2e53b' },
         { value: 'D', color: '#65a30d' },
         { value: 'F', color: '#365314' },
         { value: '_placeholder', color: '#facc15' },
@@ -160,7 +160,7 @@ export default function Home() {
             >
                 {(provided) => (
                     <div
-                        className='w-full min-h-[5.5rem] gap-2 p-4 rounded-md bg-red-200 flex flex-wrap'
+                        className='w-full min-h-[5.5rem] gap-2 p-4 rounded-md bg-gray-300 flex flex-wrap'
                         ref={provided.innerRef}
                         {...provided.droppableProps}
                     >
