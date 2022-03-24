@@ -1,7 +1,13 @@
 import Item from '@/components/Item';
 import React from 'react';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
-export default function Tier({ tierData, index, data, onDeleteTier }) {
+export default function Tier({
+    tierData,
+    index,
+    data,
+    onDeleteTier,
+    onDeleteItem,
+}) {
     return (
         <Draggable
             key={tierData.value}
@@ -18,7 +24,7 @@ export default function Tier({ tierData, index, data, onDeleteTier }) {
                         <div
                             {...provided.dragHandleProps}
                             style={{ backgroundColor: tierData.color }}
-                            className={`group relative flex justify-center items-center p-1 mr-1 h-16 w-16 rounded-md`}
+                            className='group relative flex justify-center items-center p-1 mr-1 h-20 w-20 rounded-md'
                         >
                             {tierData.value}
                             <div
@@ -40,7 +46,7 @@ export default function Tier({ tierData, index, data, onDeleteTier }) {
                         >
                             {(provided) => (
                                 <div
-                                    className='w-full p-2 h-16 rounded-md bg-red-200 flex'
+                                    className='px-1 w-full min-h-[5rem] transition-all rounded-md bg-red-200 flex items-center'
                                     ref={provided.innerRef}
                                     {...provided.droppableProps}
                                 >
@@ -50,6 +56,7 @@ export default function Tier({ tierData, index, data, onDeleteTier }) {
                                                 itemData={itemData}
                                                 index={index}
                                                 key={itemData.id}
+                                                onDeleteItem={onDeleteItem}
                                             />
                                         )
                                     )}

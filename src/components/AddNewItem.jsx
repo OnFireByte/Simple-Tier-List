@@ -10,14 +10,16 @@ export default function AddNewItem({
         <form
             onSubmit={(e) => {
                 e.preventDefault();
-                data.dataByTier['_placeholder'].push({
-                    id: uuid(),
-                    value: newValInput,
-                });
-                setData(data);
-                setNewValInput('');
+                if (newValInput) {
+                    data.dataByTier['_placeholder'].push({
+                        id: uuid(),
+                        value: newValInput,
+                    });
+                    setData(data);
+                    setNewValInput('');
+                }
             }}
-            className='w-2/3 mx-auto my-4'
+            className='m-4'
         >
             <div className='mx-auto p-0 flex items-center justify-center gap-10'>
                 <input

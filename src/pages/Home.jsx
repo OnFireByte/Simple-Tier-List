@@ -71,6 +71,18 @@ export default function Home() {
         }
     };
 
+    const onDeleteItem = (itemID) => {
+        console.log('deleting');
+        Object.keys(data.dataByTier).forEach((tier) => {
+            data.dataByTier[tier] = data.dataByTier[tier].filter(
+                (item) => item.id !== itemID
+            );
+        });
+        console.log(data);
+        setData(data);
+        forceUpdate();
+    };
+
     return (
         <main>
             <h1 className='text-indigo-700 text-center my-2'>
@@ -92,6 +104,7 @@ export default function Home() {
                                                 index={index}
                                                 data={data}
                                                 key={index}
+                                                onDeleteItem={onDeleteItem}
                                                 onDeleteTier={(tierName) => {
                                                     const newTier =
                                                         tierData.filter(
@@ -121,14 +134,18 @@ export default function Home() {
                     randomColor={randomColor}
                     setNewTierInput={setNewTierInput}
                 />
-                <PlaceholderField />
+
+                <div className='flex w-4/5 mx-auto items-center justify-center'>
+                    <PlaceholderField />
+                    <AddNewItem
+                        setData={setData}
+                        data={data}
+                        setNewValInput={setNewValInput}
+                        newValInput={newValInput}
+                        className='m-0'
+                    />
+                </div>
             </DragDropContext>
-            <AddNewItem
-                setData={setData}
-                data={data}
-                setNewValInput={setNewValInput}
-                newValInput={newValInput}
-            />
         </main>
     );
 
@@ -143,7 +160,7 @@ export default function Home() {
             >
                 {(provided) => (
                     <div
-                        className='w-full h-20 p-4 rounded-md bg-red-200 flex'
+                        className='w-full min-h-[5.5rem] gap-2 p-4 rounded-md bg-red-200 flex flex-wrap'
                         ref={provided.innerRef}
                         {...provided.droppableProps}
                     >
@@ -153,6 +170,7 @@ export default function Home() {
                                     itemData={itemData}
                                     index={index}
                                     key={itemData.id}
+                                    onDeleteItem={onDeleteItem}
                                 />
                             )
                         )}

@@ -29,15 +29,17 @@ export default function AddNewTier({
             }}
             className='w-2/3 mx-auto my-4'
         >
-            <input
-                type='text'
-                placeholder='New Tier'
-                value={newTierInput}
-                onChange={(e) => setNewTierInput(e.target.value)}
-            />
-            <button className='rounded-md bg-indigo-700 text-white p-6 font-bold'>
-                Go
-            </button>
+            <div className='mx-auto p-0 flex items-center justify-center gap-10'>
+                <input
+                    type='text'
+                    placeholder='New Tier'
+                    value={newTierInput}
+                    onChange={(e) => setNewTierInput(e.target.value)}
+                />
+                <button className='rounded-md bg-indigo-700 text-white p-6 font-bold'>
+                    Go
+                </button>
+            </div>
         </form>
     );
 }
