@@ -25,7 +25,7 @@ export default function Tier({
                         <div
                             {...provided.dragHandleProps}
                             style={{ backgroundColor: tierData.color }}
-                            className='group text-2xl font-bold text-black drop-shadow-md text-sh relative flex justify-center items-center p-1 mr-1 h-20 w-20 rounded-md'
+                            className='group break-all text-xl text-center overflow-hidden font-bold text-black drop-shadow-md text-sh relative flex justify-center items-center p-1 mr-1 h-20 w-20 rounded-md'
                         >
                             {tierData.value}
                             <div
