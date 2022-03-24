@@ -25,9 +25,11 @@ export default function Tier({
                         <div
                             {...provided.dragHandleProps}
                             style={{ backgroundColor: tierData.color }}
-                            className='group break-all text-xl text-center overflow-hidden font-bold text-black drop-shadow-md text-sh relative flex justify-center items-center p-1 mr-1 h-20 w-20 rounded-md'
+                            className='group  text-xl text-center  font-bold text-black drop-shadow-md text-sh relative h-20 w-20 rounded-md'
                         >
-                            {tierData.value}
+                            <div className='break-all overflow-hidden w-full h-full flex justify-center items-center p-1 mr-1'>
+                                {tierData.value}
+                            </div>
                             <div
                                 className='group-hover:opacity-100 opacity-0 transition-all absolute flex justify-center items-center w-6 h-6 -right-2 -top-2 rounded-full bg-red-700 text-white cursor-pointer'
                                 onClick={() => {

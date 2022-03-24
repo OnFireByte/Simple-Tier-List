@@ -3,7 +3,8 @@ import AddNewTier from '@/components/AddNewTier';
 import Item from '@/components/Item';
 import Tier from '@/components/Tier';
 import randomColor from '@/modules/randomColor';
-import React, { useCallback, useEffect, useState } from 'react';
+import { toPng } from 'html-to-image';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { v4 as uuid } from 'uuid';
 
@@ -82,6 +83,23 @@ export default function Home() {
         setData(data);
         forceUpdate();
     };
+    const ref = useRef(null);
+    const downloadTierList = () => {
+        if (ref.current === null) {
+            return;
+        }
+
+        toPng(ref.current, { cacheBust: true })
+            .then((dataUrl) => {
+                const link = document.createElement('a');
+                link.download = 'TierList.png';
+                link.href = dataUrl;
+                link.click();
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
 
     return (
         <main>
@@ -89,44 +107,49 @@ export default function Home() {
                 Simple Tier List
             </h1>
             <DragDropContext onDragEnd={onDragEnd} type='item'>
-                <section className='p-4 w-2/3 mx-auto'>
-                    <Droppable droppableId='tiers' type='tier' key='tiers'>
-                        {(provided) => (
-                            <div
-                                ref={provided.innerRef}
-                                {...provided.droppableProps}
-                            >
-                                {data.tiers.map(
-                                    (item, index) =>
-                                        item.value != '_placeholder' && (
-                                            <Tier
-                                                tierData={item}
-                                                index={index}
-                                                data={data}
-                                                key={index}
-                                                onDeleteItem={onDeleteItem}
-                                                onDeleteTier={(tierName) => {
-                                                    const newTier =
-                                                        tierData.filter(
-                                                            (n) =>
-                                                                n.value !=
-                                                                tierName
-                                                        );
-                                                    setTierData(newTier);
-                                                    delete data.dataByTier[
-                                                        tierData
-                                                    ];
-                                                    setData(data);
-                                                }}
-                                            />
-                                        )
-                                )}
+                <div ref={ref}>
+                    <section className='p-4 w-2/3 mx-auto bg-white rounded-lg'>
+                        <Droppable droppableId='tiers' type='tier' key='tiers'>
+                            {(provided) => (
+                                <div
+                                    ref={provided.innerRef}
+                                    {...provided.droppableProps}
+                                >
+                                    {data.tiers.map(
+                                        (item, index) =>
+                                            item.value != '_placeholder' && (
+                                                <Tier
+                                                    tierData={item}
+                                                    index={index}
+                                                    data={data}
+                                                    key={index}
+                                                    onDeleteItem={onDeleteItem}
+                                                    onDeleteTier={(
+                                                        tierName
+                                                    ) => {
+                                                        const newTier =
+                                                            tierData.filter(
+                                                                (n) =>
+                                                                    n.value !=
+                                                                    tierName
+                                                            );
+                                                        setTierData(newTier);
+                                                        delete data.dataByTier[
+                                                            tierData
+                                                        ];
+                                                        setData(data);
+                                                    }}
+                                                />
+                                            )
+                                    )}
 
-                                {provided.placeholder}
-                            </div>
-                        )}
-                    </Droppable>
-                </section>
+                                    {provided.placeholder}
+                                </div>
+                            )}
+                        </Droppable>
+                    </section>
+                </div>
+                <div className='w-full flex justify-center'></div>
                 <AddNewTier
                     newTierInput={newTierInput}
                     setTierData={setTierData}
@@ -144,6 +167,12 @@ export default function Home() {
                         newValInput={newValInput}
                         className='m-0'
                     />
+                    <button
+                        onClick={downloadTierList}
+                        className='p-2 mx-auto rounded-md text-lg font-bold self-center bg-indigo-700 text-white'
+                    >
+                        Download
+                    </button>
                 </div>
             </DragDropContext>
         </main>
