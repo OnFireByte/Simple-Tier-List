@@ -1,28 +1,30 @@
-import React from 'react';
+import textColorCalculate from '@/modules/textColorCalculate';
+import React, { useState } from 'react';
 import AddIcon from '@/assets/add-symbol.svg?component';
+import { v4 as uuid } from 'uuid';
+import ColorPopover from './ColorPopover';
+import randomColor from '@/modules/randomColor';
+
 export default function AddNewTier({
     newTierInput,
     setTierData,
     tierData,
-    randomColor,
     setNewTierInput,
 }) {
+    const [color, setColor] = useState(randomColor());
     return (
         <form
             onSubmit={(e) => {
                 e.preventDefault();
 
-                if (
-                    !tierData
-                        .map((x) => x.value.toLowerCase())
-                        .includes(newTierInput.toLowerCase()) &&
-                    newTierInput
-                ) {
+                if (newTierInput) {
                     setTierData([
                         ...tierData,
                         {
+                            id: uuid(),
                             value: newTierInput,
-                            color: randomColor(),
+                            color: color,
+                            textColor: textColorCalculate(color),
                         },
                     ]);
                 }
@@ -31,14 +33,15 @@ export default function AddNewTier({
             }}
             className='w-2/3 mx-auto my-4'
         >
-            <div className='mx-auto p-0 flex items-center justify-center gap-10'>
+            <div className='mx-auto p-0 flex items-center justify-center gap-6'>
                 <input
                     type='text'
                     placeholder='New Tier'
                     value={newTierInput}
                     onChange={(e) => setNewTierInput(e.target.value)}
-                    className='h-16 rounded-md focus:border-indigo-600'
+                    className='h-16 rounded-md bg-gray-200 p-2 placeholder-g focus:border-indigo-600'
                 />
+                <ColorPopover color={color} setColor={setColor} />
                 <button className='rounded-md bg-indigo-700 text-white h-16 w-16 flex justify-center items-center font-bold'>
                     <AddIcon
                         style={{

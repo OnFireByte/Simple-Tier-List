@@ -1,53 +1,48 @@
 import Item from '@/components/Item';
-import React from 'react';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
-import AddIcon from '@/assets/add-symbol.svg?component';
+import React from 'react';
+import EditDropDown from './EditDropDown';
+
 export default function Tier({
     tierData,
     index,
     data,
     onDeleteTier,
     onDeleteItem,
+    onEditItem,
+    onEditTier,
 }) {
     return (
-        <Draggable
-            key={tierData.value}
-            draggableId={tierData.value}
-            index={index}
-        >
+        <Draggable key={tierData.id} draggableId={tierData.id} index={index}>
             {(provided) => (
                 <div
                     {...provided.draggableProps}
                     ref={provided.innerRef}
                     className='p-1'
                 >
-                    <div className='p-1 drop-shadow-lg rounded-lg bg-gray-200 w-full flex flex-row items-center'>
+                    <div className='p-1 rounded-lg bg-gray-200 w-full flex flex-row items-center'>
                         <div
                             {...provided.dragHandleProps}
-                            style={{ backgroundColor: tierData.color }}
-                            className='group  text-xl text-center  font-bold text-black drop-shadow-md text-sh relative h-20 w-20 rounded-md'
+                            style={{
+                                backgroundColor: tierData.color,
+                                color: tierData?.textColor,
+                            }}
+                            className='group mr-1 text-xl text-center font-bold text-sh relative h-20 w-20 rounded-md'
                         >
                             <div className='break-all overflow-hidden w-full h-full flex justify-center items-center p-1 mr-1'>
                                 {tierData.value}
                             </div>
-                            <div
-                                className='group-hover:opacity-100 opacity-0 transition-all absolute flex justify-center items-center w-6 h-6 -right-2 -top-2 rounded-full bg-red-700 text-white cursor-pointer'
-                                onClick={() => {
-                                    onDeleteTier(tierData.value);
-                                }}
-                            >
-                                <AddIcon
-                                    style={{
-                                        transform: 'rotate(45deg)',
-                                        height: '60%',
-                                    }}
-                                />
-                            </div>
+                            <EditDropDown
+                                onDelete={onDeleteTier}
+                                onEdit={onEditTier}
+                                data={tierData}
+                                mode='tier'
+                            />
                         </div>
 
                         <Droppable
-                            droppableId={tierData.value}
-                            key={tierData.value}
+                            droppableId={tierData.id}
+                            key={tierData.id}
                             direction='horizontal'
                             isCombineEnabled={true}
                             type='item'
@@ -58,16 +53,16 @@ export default function Tier({
                                     ref={provided.innerRef}
                                     {...provided.droppableProps}
                                 >
-                                    {data.dataByTier[tierData.value].map(
-                                        (itemData, index) => (
+                                    {data.dataByTier
+                                        .get(tierData.id)
+                                        .map((itemData, index) => (
                                             <Item
                                                 itemData={itemData}
                                                 index={index}
                                                 key={itemData.id}
                                                 onDeleteItem={onDeleteItem}
                                             />
-                                        )
-                                    )}
+                                        ))}
                                     {provided.placeholder}
                                 </div>
                             )}

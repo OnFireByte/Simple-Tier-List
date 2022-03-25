@@ -7,38 +7,74 @@ import { toPng } from 'html-to-image';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { v4 as uuid } from 'uuid';
+import textColorCalculate from '@/modules/textColorCalculate';
 
 export default function Home() {
     const [newTierInput, setNewTierInput] = useState('');
     const [newValInput, setNewValInput] = useState('');
     const [tierData, setTierData] = useState([
-        { value: 'S', color: '#dc2626' },
-        { value: 'A', color: '#ea580c' },
-        { value: 'B', color: '#facc15' },
-        { value: 'C', color: '#f2e53b' },
-        { value: 'D', color: '#65a30d' },
-        { value: 'F', color: '#365314' },
-        { value: '_placeholder', color: '#facc15' },
+        {
+            id: uuid(),
+            value: 'S',
+            color: '#dc2626',
+            textColor: 'black',
+        },
+        {
+            id: uuid(),
+            value: 'A',
+            color: '#ea580c',
+            textColor: 'black',
+        },
+        {
+            id: uuid(),
+            value: 'B',
+            color: '#facc15',
+            textColor: textColorCalculate('#facc15'),
+        },
+        {
+            id: uuid(),
+            value: 'C',
+            color: '#f2e53b',
+            textColor: textColorCalculate('#f2e53b'),
+        },
+        {
+            id: uuid(),
+            value: 'D',
+            color: '#65a30d',
+            textColor: textColorCalculate('#65a30d'),
+        },
+        {
+            id: uuid(),
+            value: 'F',
+            color: '#557d25',
+            textColor: 'black',
+        },
+        {
+            id: '_placeholder',
+            value: '_placeholder',
+            color: '#FFFFFF',
+            textColor: 'black',
+        },
     ]);
     const [data, setData] = useState({
         tiers: tierData,
-        dataByTier: {},
+        dataByTier: new Map(),
     });
     tierData.forEach((v) => {
-        if (!data.dataByTier[v.value]) {
-            data.dataByTier[v.value] = [];
+        if (!data.dataByTier.has(v.id)) {
+            data.dataByTier.set(v.id, []);
         }
     });
 
     const [, updateState] = useState();
     const forceUpdate = useCallback(() => updateState({}), []);
     useEffect(() => {
-        const dataKeys = Object.keys(data.dataByTier);
+        const dataKeys = [...data.dataByTier.keys()];
         data.tiers = tierData;
         tierData
-            .filter((n) => !dataKeys.includes(n.value))
+            .filter((n) => !dataKeys.includes(n.id))
             .forEach((n) => {
-                data.dataByTier[n.value] = [{ id: uuid(), value: n.value }];
+                data.dataByTier.set(n.id, [{ id: uuid(), value: n.value }]);
             });
         setData(data);
         forceUpdate();
@@ -58,31 +94,50 @@ export default function Home() {
                 setTierData(tierData);
                 break;
             case 'item':
-                [reordered] = data.dataByTier[e.source.droppableId].splice(
-                    e.source.index,
-                    1
-                );
-                data.dataByTier[e.destination.droppableId].splice(
-                    e.destination.index,
-                    0,
-                    reordered
-                );
+                [reordered] = data.dataByTier
+                    .get(e.source.droppableId)
+                    .splice(e.source.index, 1);
+                data.dataByTier
+                    .get(e.destination.droppableId)
+                    .splice(e.destination.index, 0, reordered);
                 setData(data);
                 break;
         }
     };
 
     const onDeleteItem = (itemID) => {
-        console.log('deleting');
-        Object.keys(data.dataByTier).forEach((tier) => {
-            data.dataByTier[tier] = data.dataByTier[tier].filter(
-                (item) => item.id !== itemID
-            );
+        let keys = [];
+        for (let key of data.dataByTier) {
+            keys.push(key[0]);
+        }
+        keys.forEach((tier) => {
+            const res = data.dataByTier
+                .get(tier)
+                .filter((item) => item.id !== itemID);
+            data.dataByTier.set(tier, res);
         });
-        console.log(data);
         setData(data);
         forceUpdate();
     };
+
+    const onDeleteTier = (tierID) => {
+        const newTier = tierData.filter((n) => n.id != tierID);
+        setTierData(newTier);
+        data.tiers = newTier;
+        data.dataByTier.delete(tierID);
+        setData(data);
+    };
+
+    const onEditTier = (tierID, newdata) => {
+        const index = tierData.findIndex((e) => e.id == tierID);
+        console.log(index);
+        const newTier = tierData.filter((n) => n.id != tierID);
+        newTier.splice(index, 0, newdata);
+        setTierData(newTier);
+        data.tiers = newTier;
+        setData(data);
+    };
+
     const ref = useRef(null);
     const downloadTierList = () => {
         if (ref.current === null) {
@@ -103,7 +158,7 @@ export default function Home() {
 
     return (
         <main>
-            <h1 className='text-indigo-700 text-center my-2'>
+            <h1 className='text-indigo-700 text-center my-2 text-[40px] font-bold'>
                 Simple Tier List
             </h1>
             <DragDropContext onDragEnd={onDragEnd} type='item'>
@@ -124,21 +179,8 @@ export default function Home() {
                                                     data={data}
                                                     key={index}
                                                     onDeleteItem={onDeleteItem}
-                                                    onDeleteTier={(
-                                                        tierName
-                                                    ) => {
-                                                        const newTier =
-                                                            tierData.filter(
-                                                                (n) =>
-                                                                    n.value !=
-                                                                    tierName
-                                                            );
-                                                        setTierData(newTier);
-                                                        delete data.dataByTier[
-                                                            tierData
-                                                        ];
-                                                        setData(data);
-                                                    }}
+                                                    onDeleteTier={onDeleteTier}
+                                                    onEditTier={onEditTier}
                                                 />
                                             )
                                     )}
@@ -189,20 +231,20 @@ export default function Home() {
             >
                 {(provided) => (
                     <div
-                        className='w-full min-h-[5.5rem] gap-2 p-4 rounded-md bg-gray-300 flex flex-wrap'
+                        className='w-full min-h-[6rem] transition-all gap-2 p-4 rounded-md bg-gray-300 flex flex-wrap'
                         ref={provided.innerRef}
                         {...provided.droppableProps}
                     >
-                        {data.dataByTier['_placeholder'].map(
-                            (itemData, index) => (
+                        {data.dataByTier
+                            .get('_placeholder')
+                            .map((itemData, index) => (
                                 <Item
                                     itemData={itemData}
                                     index={index}
                                     key={itemData.id}
                                     onDeleteItem={onDeleteItem}
                                 />
-                            )
-                        )}
+                            ))}
                         {provided.placeholder}
                     </div>
                 )}

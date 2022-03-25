@@ -11,7 +11,7 @@ export default function AddNewItem({
             onSubmit={(e) => {
                 e.preventDefault();
                 if (newValInput) {
-                    data.dataByTier['_placeholder'].push({
+                    data.dataByTier.get('_placeholder').push({
                         id: uuid(),
                         value: newValInput,
                     });
