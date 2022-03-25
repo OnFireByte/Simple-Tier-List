@@ -7,6 +7,7 @@ import { toPng } from 'html-to-image';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { v4 as uuid } from 'uuid';
+import { DownloadIcon } from '@heroicons/react/outline';
 import textColorCalculate from '@/modules/textColorCalculate';
 
 export default function Home() {
@@ -162,7 +163,10 @@ export default function Home() {
             return;
         }
 
-        toPng(ref.current, { cacheBust: true })
+        toPng(ref.current, {
+            cacheBust: true,
+            style: { margin: 0 },
+        })
             .then((dataUrl) => {
                 const link = document.createElement('a');
                 link.download = 'TierList.png';
@@ -180,8 +184,11 @@ export default function Home() {
                 Simple Tier List
             </h1>
             <DragDropContext onDragEnd={onDragEnd} type='item'>
-                <div ref={ref}>
-                    <section className='p-4 w-[60%] mx-auto bg-white rounded-lg'>
+                <div>
+                    <div
+                        ref={ref}
+                        className='p-4 w-[60%]  mx-auto bg-white rounded-lg'
+                    >
                         <Droppable droppableId='tiers' type='tier' key='tiers'>
                             {(provided) => (
                                 <div
@@ -209,7 +216,7 @@ export default function Home() {
                                 </div>
                             )}
                         </Droppable>
-                    </section>
+                    </div>
                 </div>
                 <div className='w-full flex justify-center'></div>
                 <AddNewTier
@@ -231,8 +238,9 @@ export default function Home() {
                     />
                     <button
                         onClick={downloadTierList}
-                        className='p-2 mx-auto rounded-md text-lg font-bold self-center bg-indigo-700 text-white'
+                        className='p-2 mx-auto flex hover:bg-indigo-900 transition-all ease-in-out items-center rounded-md text-lg font-bold self-center bg-indigo-700 text-white'
                     >
+                        <DownloadIcon className='h-6 mr-1' />
                         Download
                     </button>
                 </div>
