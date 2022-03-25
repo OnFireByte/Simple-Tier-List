@@ -5,6 +5,7 @@ import {
     DownloadIcon,
     DocumentDuplicateIcon,
     DocumentDownloadIcon,
+    DocumentAddIcon,
 } from '@heroicons/react/solid';
 
 const Modal = ({ isOpen, closeModal, setData, setTierData }) => {
@@ -180,8 +181,24 @@ export default function HomeDropDownOption({
                                             ? 'bg-indigo-700 text-white'
                                             : 'text-gray-900'
                                     } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                                    onClick={() => {
+                                        forceUpdate();
+                                        const element =
+                                            document.createElement('a');
+                                        const file = new Blob(
+                                            [JSON.stringify(data, replacer)],
+                                            {
+                                                type: 'text/plain',
+                                            }
+                                        );
+                                        element.href =
+                                            URL.createObjectURL(file);
+                                        element.download = 'tierListConFig.txt';
+                                        document.body.appendChild(element);
+                                        element.click();
+                                    }}
                                 >
-                                    <DocumentDuplicateIcon className='h-5 mr-2' />
+                                    <DocumentDownloadIcon className='h-5 mr-2' />
                                     Download Config
                                 </button>
                             )}
@@ -216,7 +233,7 @@ export default function HomeDropDownOption({
                                     } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
                                     onClick={openModal}
                                 >
-                                    <DocumentDownloadIcon className='h-5 mr-2' />
+                                    <DocumentAddIcon className='h-5 mr-2' />
                                     Import Config
                                 </button>
                             )}
