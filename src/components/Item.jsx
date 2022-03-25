@@ -26,12 +26,12 @@ export default function Item({
                         <div className='rounded-md h-full w-full'>
                             <img
                                 src={itemData.img}
-                                className='peer rounded-md object-cover relative h-full w-full'
+                                className='peer select-none rounded-md object-cover relative h-full w-full'
                                 alt={itemData.value}
                             />
                         </div>
                     ) : (
-                        <div className='overflow-hidden w-full h-full text-center'>
+                        <div className='overflow-hidden select-none w-full h-full text-center flex items-center justify-center'>
                             {itemData.value}
                         </div>
                     )}

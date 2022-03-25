@@ -30,7 +30,7 @@ export default function Tier({
                             }}
                             className='group mr-1 text-xl text-center font-bold text-sh relative h-20 w-20 rounded-md'
                         >
-                            <div className='break-all overflow-hidden w-full h-full flex justify-center items-center p-1 mr-1'>
+                            <div className='select-none break-all overflow-hidden w-full h-full flex justify-center items-center p-1 mr-1'>
                                 {tierData.value}
                             </div>
                             <EditDropDown

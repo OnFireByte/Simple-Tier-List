@@ -116,6 +116,7 @@ function EditModal({ onEdit, forceUpdate, data, isOpen, closeModal, mode }) {
     function resetModal() {
         setColor(data?.color);
         setName(data?.value);
+        setUrl(data?.img);
     }
     const closeAndResetModal = () => {
         closeModal();
@@ -164,7 +165,33 @@ function EditModal({ onEdit, forceUpdate, data, isOpen, closeModal, mode }) {
                             >
                                 Edit {capitalize(mode)}
                             </Dialog.Title>
-                            <form className='mt-2'>
+                            <form
+                                className='mt-2'
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    let newData;
+                                    if (mode == 'tier') {
+                                        newData = {
+                                            id: data.id,
+                                            value: name,
+                                            color,
+                                            textColor:
+                                                textColorCalculate(color),
+                                        };
+                                    } else if (mode == 'item') {
+                                        newData = {
+                                            id: data.id,
+                                            value: name,
+                                            img: url,
+                                            textColor:
+                                                textColorCalculate(color),
+                                        };
+                                    }
+                                    onEdit(data.id, newData);
+                                    closeModal();
+                                    forceUpdate();
+                                }}
+                            >
                                 <label className='block'>
                                     <span className='block text-sm font-medium text-slate-700'>
                                         {capitalize(mode)}'s Name
@@ -247,39 +274,15 @@ function EditModal({ onEdit, forceUpdate, data, isOpen, closeModal, mode }) {
                                         </div>
                                     </>
                                 )}
+                                <div className='mt-4 flex flex-row-reverse'>
+                                    <button
+                                        type='submit'
+                                        className='inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-700 border border-transparent rounded-md hover:bg-indigo-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500'
+                                    >
+                                        Submit
+                                    </button>
+                                </div>
                             </form>
-
-                            <div className='mt-4 flex flex-row-reverse'>
-                                <button
-                                    type='button'
-                                    className='inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-700 border border-transparent rounded-md hover:bg-indigo-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500'
-                                    onClick={() => {
-                                        let newData;
-                                        if (mode == 'tier') {
-                                            newData = {
-                                                id: data.id,
-                                                value: name,
-                                                color,
-                                                textColor:
-                                                    textColorCalculate(color),
-                                            };
-                                        } else if (mode == 'item') {
-                                            newData = {
-                                                id: data.id,
-                                                value: name,
-                                                img: url,
-                                                textColor:
-                                                    textColorCalculate(color),
-                                            };
-                                        }
-                                        onEdit(data.id, newData);
-                                        forceUpdate();
-                                        closeModal();
-                                    }}
-                                >
-                                    Submit
-                                </button>
-                            </div>
                         </div>
                     </Transition.Child>
                 </div>
