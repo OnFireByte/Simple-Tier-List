@@ -13,7 +13,6 @@ import HomeDropDownOption from '@/components/HomeDropDownOption';
 
 export default function Home() {
     const [newTierInput, setNewTierInput] = useState('');
-    const [newValInput, setNewValInput] = useState('');
     const [tierData, setTierData] = useState([
         {
             id: uuid(),
@@ -243,14 +242,6 @@ export default function Home() {
                         setTierData={setTierData}
                         data={data}
                     />
-
-                    <button
-                        onClick={downloadTierList}
-                        className='p-2  ml-3 flex hover:bg-indigo-900 transition-all ease-in-out items-center rounded-md text-lg font-bold self-center bg-indigo-700 text-white'
-                    >
-                        <DownloadIcon className='h-6 mr-1' />
-                        Download
-                    </button>
                 </div>
             </DragDropContext>
         </main>
