@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Menu, Transition, Dialog } from '@headlessui/react';
 import { capitalize } from 'lodash';
 import textColorCalculate from '@/modules/textColorCalculate';
@@ -126,8 +126,8 @@ function EditModal({ onEdit, forceUpdate, data, isOpen, closeModal, mode }) {
         <Transition appear show={isOpen} as={Fragment}>
             <Dialog
                 as='div'
-                className='fixed inset-0 z-10 overflow-y-auto'
                 onClose={closeAndResetModal}
+                className='fixed inset-0 overflow-y-auto z-[100]'
             >
                 <div className='min-h-screen px-4 text-center'>
                     <Transition.Child
