@@ -1,6 +1,7 @@
 {
     "name": "vite-react-tailwind-starter",
     "version": "0.1.0",
+    "license" : "MIT license",
     "scripts": {
         "dev": "cross-env TAILWIND_MODE=watch vite",
         "build": "vite build",
