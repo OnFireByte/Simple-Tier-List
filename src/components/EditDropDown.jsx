@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState, useCallback } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Menu, Transition, Dialog } from '@headlessui/react';
 import { capitalize } from 'lodash';
 import textColorCalculate from '@/modules/textColorCalculate';
