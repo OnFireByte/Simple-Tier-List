@@ -1,6 +1,5 @@
 import textColorCalculate from '@/modules/textColorCalculate';
 import React, { useState } from 'react';
-import AddIcon from '@/assets/add-symbol.svg?component';
 import { v4 as uuid } from 'uuid';
 import ColorPopover from './ColorPopover';
 import randomColor from '@/modules/randomColor';
@@ -47,13 +46,8 @@ export default function AddNewTier({
                     className='h-16 rounded-md bg-gray-200 p-2 placeholder-g focus:border-indigo-600'
                 />
                 <ColorPopover color={color} setColor={setColor} />
-                <button className='rounded-md bg-indigo-700 text-white h-16 w-16 flex justify-center items-center font-bold'>
-                    <AddIcon
-                        style={{
-                            height: '40%',
-                            fill: '#FFFFFF',
-                        }}
-                    />
+                <button className='rounded-md bg-indigo-700 text-white py-3 w-16 flex justify-center items-center font-bold'>
+                    Add
                 </button>
             </div>
         </form>

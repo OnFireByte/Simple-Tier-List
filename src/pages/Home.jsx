@@ -9,6 +9,7 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { v4 as uuid } from 'uuid';
 import { DownloadIcon } from '@heroicons/react/outline';
 import textColorCalculate from '@/modules/textColorCalculate';
+import HomeDropDownOption from '@/components/HomeDropDownOption';
 
 export default function Home() {
     const [newTierInput, setNewTierInput] = useState('');
@@ -236,9 +237,16 @@ export default function Home() {
                         newValInput={newValInput}
                         className='m-0'
                     />
+                    <HomeDropDownOption
+                        onDownload={downloadTierList}
+                        setData={setData}
+                        setTierData={setTierData}
+                        data={data}
+                    />
+
                     <button
                         onClick={downloadTierList}
-                        className='p-2 mx-auto flex hover:bg-indigo-900 transition-all ease-in-out items-center rounded-md text-lg font-bold self-center bg-indigo-700 text-white'
+                        className='p-2  ml-3 flex hover:bg-indigo-900 transition-all ease-in-out items-center rounded-md text-lg font-bold self-center bg-indigo-700 text-white'
                     >
                         <DownloadIcon className='h-6 mr-1' />
                         Download
