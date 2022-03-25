@@ -126,8 +126,8 @@ function EditModal({ onEdit, forceUpdate, data, isOpen, closeModal, mode }) {
         <Transition appear show={isOpen} as={Fragment}>
             <Dialog
                 as='div'
-                onClose={closeAndResetModal}
                 className='fixed inset-0 overflow-y-auto z-[100]'
+                onClose={closeAndResetModal}
             >
                 <div className='min-h-screen px-4 text-center'>
                     <Transition.Child
@@ -167,7 +167,7 @@ function EditModal({ onEdit, forceUpdate, data, isOpen, closeModal, mode }) {
                             </Dialog.Title>
                             <form
                                 className='mt-2'
-                                onClick={(e) => {
+                                onSubmit={(e) => {
                                     e.preventDefault();
                                     let newData;
                                     if (mode == 'tier') {
