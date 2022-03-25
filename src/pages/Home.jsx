@@ -181,7 +181,7 @@ export default function Home() {
             </h1>
             <DragDropContext onDragEnd={onDragEnd} type='item'>
                 <div ref={ref}>
-                    <section className='p-4 w-2/3 mx-auto bg-white rounded-lg'>
+                    <section className='p-4 w-[60%] mx-auto bg-white rounded-lg'>
                         <Droppable droppableId='tiers' type='tier' key='tiers'>
                             {(provided) => (
                                 <div

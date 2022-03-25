@@ -50,7 +50,7 @@ export default function Tier({
                         >
                             {(provided) => (
                                 <div
-                                    className='px-1 w-full min-h-[5rem] transition-all rounded-md bg-gray-300 flex items-center'
+                                    className='px-1 w-full min-h-[6rem] transition-all rounded-md bg-gray-300 flex items-center'
                                     ref={provided.innerRef}
                                     {...provided.droppableProps}
                                 >
