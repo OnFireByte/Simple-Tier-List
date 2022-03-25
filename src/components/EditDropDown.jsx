@@ -198,7 +198,7 @@ function EditModal({ onEdit, forceUpdate, data, isOpen, closeModal, mode }) {
                                     </span>
                                     <input
                                         type='text'
-                                        maxlength='20'
+                                        maxLength='20'
                                         value={name}
                                         onChange={(e) =>
                                             setName(e.target.value)
