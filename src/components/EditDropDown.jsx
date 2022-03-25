@@ -3,7 +3,7 @@ import { Menu, Transition, Dialog } from '@headlessui/react';
 import { capitalize } from 'lodash';
 import textColorCalculate from '@/modules/textColorCalculate';
 import { DebounceInput } from 'react-debounce-input';
-import { CogIcon, PencilIcon, TrashIcon } from '@heroicons/react/Outline';
+import { CogIcon, PencilIcon, TrashIcon } from '@heroicons/react/solid';
 import { HexColorPicker } from 'react-colorful';
 export default function EditDropDown({
     onDelete,
