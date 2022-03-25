@@ -11,6 +11,7 @@ export default function Tier({
     onDeleteItem,
     onEditItem,
     onEditTier,
+    forceUpdate,
 }) {
     return (
         <Draggable key={tierData.id} draggableId={tierData.id} index={index}>
@@ -56,12 +57,16 @@ export default function Tier({
                                     {data.dataByTier
                                         .get(tierData.id)
                                         .map((itemData, index) => (
-                                            <Item
-                                                itemData={itemData}
-                                                index={index}
-                                                key={itemData.id}
-                                                onDeleteItem={onDeleteItem}
-                                            />
+                                            <>
+                                                <Item
+                                                    itemData={itemData}
+                                                    index={index}
+                                                    key={itemData.id}
+                                                    onDeleteItem={onDeleteItem}
+                                                    onEditItem={onEditItem}
+                                                    forceUpdate={forceUpdate}
+                                                />
+                                            </>
                                         ))}
                                     {provided.placeholder}
                                 </div>

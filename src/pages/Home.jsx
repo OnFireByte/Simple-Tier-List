@@ -101,6 +101,7 @@ export default function Home() {
                     .get(e.destination.droppableId)
                     .splice(e.destination.index, 0, reordered);
                 setData(data);
+                forceUpdate();
                 break;
         }
     };
@@ -136,6 +137,23 @@ export default function Home() {
         setTierData(newTier);
         data.tiers = newTier;
         setData(data);
+    };
+
+    const onEditItem = (itemID, newdata) => {
+        [...data.dataByTier.keys()].forEach((key) => {
+            console.log(key);
+            const res = data.dataByTier
+                .get(key)
+                .map((e, i) => {
+                    return { ...e, index: i };
+                })
+                .filter((item) => item.id === itemID)[0];
+            if (res) {
+                data.dataByTier.get(key)[res.index] = newdata;
+                setData(data);
+                return;
+            }
+        });
     };
 
     const ref = useRef(null);
@@ -181,6 +199,8 @@ export default function Home() {
                                                     onDeleteItem={onDeleteItem}
                                                     onDeleteTier={onDeleteTier}
                                                     onEditTier={onEditTier}
+                                                    onEditItem={onEditItem}
+                                                    forceUpdate={forceUpdate}
                                                 />
                                             )
                                     )}
@@ -243,6 +263,8 @@ export default function Home() {
                                     index={index}
                                     key={itemData.id}
                                     onDeleteItem={onDeleteItem}
+                                    onEditItem={onEditItem}
+                                    forceUpdate={forceUpdate}
                                 />
                             ))}
                         {provided.placeholder}
