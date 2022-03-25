@@ -7,17 +7,24 @@ import {
     DocumentDownloadIcon,
 } from '@heroicons/react/solid';
 
-const Modal = ({ isOpen, setIsOpen, closeModal, setData, setTierData }) => {
+const Modal = ({ isOpen, closeModal, setData, setTierData }) => {
     const [value, setValue] = useState('');
+    function reviver(key, value) {
+        if (typeof value === 'object' && value !== null) {
+            if (value.dataType === 'Map') {
+                return new Map(value.value);
+            }
+        }
+        return value;
+    }
     const submitHandler = (e) => {
         e.preventDefault();
-        const importObj = JSON.parse(value);
-        const map = new Map(Object.entries(importObj.dataByTier));
+        const importObj = JSON.parse(value, reviver);
         const tiers = importObj.tiers;
-        const mapObj = { tiers, dataByTier: map };
-        console.log(mapObj);
+        console.log(importObj);
         setTierData(tiers);
-        setData(mapObj);
+        setData(importObj);
+        setValue('');
         closeModal();
     };
     return (
@@ -102,8 +109,19 @@ export default function HomeDropDownOption({
     data,
     setData,
     setTierData,
+    forceUpdate,
 }) {
     let [isOpen, setIsOpen] = useState(true);
+    function replacer(key, value) {
+        if (value instanceof Map) {
+            return {
+                dataType: 'Map',
+                value: Array.from(value.entries()), // or with spread: value: [...value]
+            };
+        } else {
+            return value;
+        }
+    }
     function closeModal() {
         setIsOpen(false);
     }
@@ -178,8 +196,15 @@ export default function HomeDropDownOption({
                                             : 'text-gray-900'
                                     } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
                                     onClick={() => {
+                                        forceUpdate();
+                                        console.log(
+                                            JSON.stringify(
+                                                data.dataByTier,
+                                                replacer
+                                            )
+                                        );
                                         navigator.clipboard.writeText(
-                                            JSON.stringify(data)
+                                            JSON.stringify(data, replacer)
                                         );
                                     }}
                                 >

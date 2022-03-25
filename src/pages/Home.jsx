@@ -240,6 +240,7 @@ export default function Home() {
                         setData={setData}
                         setTierData={setTierData}
                         data={data}
+                        forceUpdate={forceUpdate}
                     />
                 </div>
             </DragDropContext>
