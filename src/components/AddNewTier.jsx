@@ -17,7 +17,12 @@ export default function AddNewTier({
             onSubmit={(e) => {
                 e.preventDefault();
 
-                if (newTierInput) {
+                if (
+                    !tierData
+                        .map((x) => x.value.toLowerCase())
+                        .includes(newTierInput.toLowerCase()) &&
+                    newTierInput
+                ) {
                     setTierData([
                         ...tierData,
                         {

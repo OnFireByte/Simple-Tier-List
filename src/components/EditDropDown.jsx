@@ -103,7 +103,7 @@ export default function EditDropDown({
 }
 
 function EditModal({ onEdit, data, isOpen, closeModal, mode }) {
-    const [color, setColor] = useState(data?.color);
+    const [color, setColor] = useState(data?.color || '#000000');
     const [name, setName] = useState(data?.value);
     function resetModal() {
         setColor(data?.color);

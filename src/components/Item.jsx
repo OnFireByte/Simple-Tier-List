@@ -14,10 +14,20 @@ export default function Item({ itemData, index, onDeleteItem }) {
                     {...provided.draggableProps}
                     ref={provided.innerRef}
                     {...provided.dragHandleProps}
-                    className='group relative h-16 min-w-[4rem] my-2 mx-1 px-4 flex justify-center items-center bg-white rounded-md'
+                    className='group relative h-24 min-w-[6rem] max-w-[8rem] my-2 mx-1 flex justify-center items-center bg-white rounded-md'
                 >
+                    {itemData.img ? (
+                        <div className='rounded-md overflow-hidden h-full w-full'>
+                            <img
+                                src={itemData.img}
+                                className='peer object-cover relative h-full w-full'
+                            />
+                        </div>
+                    ) : (
+                        <>{itemData.value}</>
+                    )}
                     <div
-                        className='group-hover:opacity-100 opacity-0 transition-all absolute flex justify-center items-center w-6 h-6 -right-2 -top-2 rounded-full bg-red-700 text-white cursor-pointer'
+                        className='group-hover:opacity-100 peer-hover:opacity-100 z-50 opacity-0 transition-all absolute flex justify-center items-center w-6 h-6 -right-2 -top-2 rounded-full bg-red-700 text-white cursor-pointer'
                         onClick={() => {
                             onDeleteItem(itemData.id);
                         }}
@@ -28,7 +38,6 @@ export default function Item({ itemData, index, onDeleteItem }) {
                             mode='item'
                         />
                     </div>
-                    {itemData.value}
                 </div>
             )}
         </Draggable>
