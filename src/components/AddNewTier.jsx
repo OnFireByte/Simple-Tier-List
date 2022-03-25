@@ -1,6 +1,7 @@
 import textColorCalculate from '@/modules/textColorCalculate';
 import React, { useState } from 'react';
-import { v4 as uuid } from 'uuid';
+import { generate as uuid } from 'short-uuid';
+
 import ColorPopover from './ColorPopover';
 import randomColor from '@/modules/randomColor';
 

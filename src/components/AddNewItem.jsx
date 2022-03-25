@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
-import { v4 as uuid } from 'uuid';
+import { generate as uuid } from 'short-uuid';
+
 export default function AddNewItem({ setData, data, forceUpdate }) {
     const [newImgInput, setNewImgInput] = useState('');
     const [newValInput, setNewValInput] = useState('');

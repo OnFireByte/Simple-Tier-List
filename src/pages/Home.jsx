@@ -6,7 +6,8 @@ import randomColor from '@/modules/randomColor';
 import { toPng } from 'html-to-image';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { v4 as uuid } from 'uuid';
+import { generate as uuid } from 'short-uuid';
+
 import { DownloadIcon } from '@heroicons/react/outline';
 import textColorCalculate from '@/modules/textColorCalculate';
 import HomeDropDownOption from '@/components/HomeDropDownOption';

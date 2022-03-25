@@ -22,7 +22,7 @@
         "react-helmet": "^6.1.0",
         "react-router": "^5.2.0",
         "react-router-dom": "^5.2.0",
-        "uuid": "^8.3.2",
+        "short-uuid": "^4.2.0",
         "vite-plugin-svgr": "^1.1.0"
     },
     "devDependencies": {
