@@ -1,12 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import { v4 as uuid } from 'uuid';
-export default function AddNewItem({
-    setData,
-    data,
-    newValInput,
-    setNewValInput,
-}) {
+export default function AddNewItem({ setData, data, forceUpdate }) {
     const [newImgInput, setNewImgInput] = useState('');
+    const [newValInput, setNewValInput] = useState('');
 
     return (
         <form
@@ -18,7 +14,7 @@ export default function AddNewItem({
                         value: newValInput,
                         img: newImgInput,
                     });
-                    // forceUpdate();
+                    forceUpdate();
                     setNewValInput('');
                     setNewImgInput('');
                     setData(data);

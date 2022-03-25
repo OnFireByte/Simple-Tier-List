@@ -232,8 +232,7 @@ export default function Home() {
                     <AddNewItem
                         setData={setData}
                         data={data}
-                        setNewValInput={setNewValInput}
-                        newValInput={newValInput}
+                        forceUpdate={forceUpdate}
                         className='m-0'
                     />
                     <HomeDropDownOption
