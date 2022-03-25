@@ -21,7 +21,6 @@ const Modal = ({ isOpen, closeModal, setData, setTierData }) => {
         e.preventDefault();
         const importObj = JSON.parse(value, reviver);
         const tiers = importObj.tiers;
-        console.log(importObj);
         setTierData(tiers);
         setData(importObj);
         setValue('');
@@ -197,12 +196,6 @@ export default function HomeDropDownOption({
                                     } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
                                     onClick={() => {
                                         forceUpdate();
-                                        console.log(
-                                            JSON.stringify(
-                                                data.dataByTier,
-                                                replacer
-                                            )
-                                        );
                                         navigator.clipboard.writeText(
                                             JSON.stringify(data, replacer)
                                         );

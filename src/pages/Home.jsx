@@ -133,7 +133,6 @@ export default function Home() {
 
     const onEditTier = (tierID, newdata) => {
         const index = tierData.findIndex((e) => e.id == tierID);
-        console.log(index);
         const newTier = tierData.filter((n) => n.id != tierID);
         newTier.splice(index, 0, newdata);
         setTierData(newTier);
@@ -143,7 +142,6 @@ export default function Home() {
 
     const onEditItem = (itemID, newdata) => {
         [...data.dataByTier.keys()].forEach((key) => {
-            console.log(key);
             const res = data.dataByTier
                 .get(key)
                 .map((e, i) => {
