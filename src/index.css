@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    @apply from-violet-100 to-white bg-gradient-to-bl;
+}
+
 /* width */
 .tier-scrollbar::-webkit-scrollbar {
     height: 6px;

@@ -21,9 +21,9 @@ export default function AddNewItem({ setData, data, forceUpdate }) {
                     setData(data);
                 }
             }}
-            className='m-4 border-2 box-border border-gray-200 px-4 h-24 border-insi rounded-md'
+            className='m-4 ring-2 ring-gray-200 box-border bg-white  px-4 h-24 border-insi rounded-md'
         >
-            <div className='mx-auto p-0 flex h-full items-center justify-center gap-4'>
+            <div className='mx-auto p-0 flex h-full items-center justify-center gap-4 '>
                 <div className='flex h-full flex-col gap-3 justify-center items-center'>
                     <input
                         type='text'

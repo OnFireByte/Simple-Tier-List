@@ -185,7 +185,7 @@ export default function Home() {
             <DragDropContext onDragEnd={onDragEnd} type='item'>
                 <section
                     ref={ref}
-                    className='p-4 w-fit mx-auto bg-white rounded-lg'
+                    className='p-4 w-fit mx-auto shadow-lg bg-white rounded-lg'
                 >
                     <Droppable droppableId='tiers' type='tier' key='tiers'>
                         {(provided) => (
@@ -215,7 +215,7 @@ export default function Home() {
                         )}
                     </Droppable>
                 </section>
-                <div className='px-5 w-[60%] flex flex-wrap lg:flex-nowrap justify-center lg:justify-start items-center mx-auto'>
+                <div className=' w-2/3 flex flex-wrap lg:flex-nowrap justify-center lg:justify-start items-center mx-auto'>
                     <AddNewTier
                         newTierInput={newTierInput}
                         setTierData={setTierData}

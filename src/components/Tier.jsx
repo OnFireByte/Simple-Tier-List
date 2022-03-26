@@ -27,7 +27,7 @@ export default function Tier({
                     ref={provided.innerRef}
                     className='p-1 w-[66vw] mx-auto'
                 >
-                    <div className='p-1 rounded-lg bg-gray-200 flex flex-row items-center'>
+                    <div className='p-2 rounded-lg bg-slate-200 flex flex-row items-center'>
                         <div
                             {...provided.dragHandleProps}
                             style={{
@@ -57,7 +57,7 @@ export default function Tier({
                         >
                             {(provided) => (
                                 <div
-                                    className='px-1 h-[6rem] tier-scrollbar grow transition-all rounded-md bg-gray-300 flex scroll items-center'
+                                    className='px-1 h-24 tier-scrollbar grow transition-all rounded-md bg-slate-300 flex scroll items-center'
                                     ref={provided.innerRef}
                                     {...provided.droppableProps}
                                 >
