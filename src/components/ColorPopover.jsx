@@ -4,8 +4,8 @@ import { HexColorPicker } from 'react-colorful';
 
 export default function ColorPopover({ color, setColor }) {
     return (
-        <div className='top-16'>
-            <Popover className='relative'>
+        <div>
+            <Popover className='relative flex flex-col items-center'>
                 {({ open }) => (
                     <>
                         <Popover.Button
@@ -28,10 +28,11 @@ export default function ColorPopover({ color, setColor }) {
                             leaveFrom='opacity-100 translate-y-0'
                             leaveTo='opacity-0 translate-y-1'
                         >
-                            <Popover.Panel className='absolute z-10 -top-56 -left-8 transform'>
+                            <Popover.Panel className='absolute -top-[calc(53rem/4)] z-10 transform'>
                                 <HexColorPicker
                                     color={color}
                                     onChange={setColor}
+                                    className='shadow-lg'
                                 />
                             </Popover.Panel>
                         </Transition>

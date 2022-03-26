@@ -12,23 +12,29 @@ export default function Tier({
     onEditItem,
     onEditTier,
     forceUpdate,
+    // isDraging,
 }) {
     return (
-        <Draggable key={tierData.id} draggableId={tierData.id} index={index}>
+        <Draggable
+            key={tierData.id}
+            draggableId={tierData.id}
+            index={index}
+            className='p-1 mx-auto'
+        >
             {(provided) => (
                 <div
                     {...provided.draggableProps}
                     ref={provided.innerRef}
-                    className='p-1'
+                    className='p-1 w-[66vw] mx-auto'
                 >
-                    <div className='p-1 rounded-lg bg-gray-200 w-full flex flex-row items-center'>
+                    <div className='p-1 rounded-lg bg-gray-200 flex flex-row items-center'>
                         <div
                             {...provided.dragHandleProps}
                             style={{
                                 backgroundColor: tierData.color,
                                 color: tierData?.textColor,
                             }}
-                            className='group mr-1 text-xl text-center font-bold text-sh relative h-20 w-20 rounded-md'
+                            className='group mr-1 text-xl flex-shrink-0 text-center font-bold text-sh relative h-20 w-20 rounded-md'
                         >
                             <div className='select-none break-all overflow-hidden w-full h-full flex justify-center items-center p-1 mr-1'>
                                 {tierData.value}
@@ -47,10 +53,11 @@ export default function Tier({
                             direction='horizontal'
                             isCombineEnabled={true}
                             type='item'
+                            className='overflow-scroll w-52'
                         >
                             {(provided) => (
                                 <div
-                                    className='px-1 w-full min-h-[6rem] transition-all rounded-md bg-gray-300 flex items-center'
+                                    className='px-1 h-[6rem] tier-scrollbar grow transition-all rounded-md bg-gray-300 flex scroll items-center'
                                     ref={provided.innerRef}
                                     {...provided.droppableProps}
                                 >

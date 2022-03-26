@@ -36,9 +36,9 @@ export default function AddNewTier({
 
                 setNewTierInput('');
             }}
-            className='w-2/3 mx-auto my-4'
+            className='my-4'
         >
-            <div className='mx-auto p-0 flex items-center justify-center gap-6'>
+            <div className='p-0 flex flex-wrap items-center justify-center gap-6'>
                 <input
                     type='text'
                     placeholder='New Tier'

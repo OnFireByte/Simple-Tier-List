@@ -110,6 +110,7 @@ export default function HomeDropDownOption({
     setData,
     setTierData,
     forceUpdate,
+    className,
 }) {
     let [isOpen, setIsOpen] = useState(true);
     function replacer(key, value) {
@@ -138,16 +139,17 @@ export default function HomeDropDownOption({
                 setData={setData}
                 setTierData={setTierData}
             />
-            <Menu as='div' className='relative inline-flex flex-col'>
-                <div>
-                    <Menu.Button className='group h-11 flex justify-center items-center w-full px-2 py-2 bg-indigo-700 mx-2 rounded-md text-white font-bold'>
-                        <CogIcon
-                            className='h-5 mr-2 text-white group-hover:rotate-180 transition-all ease-in'
-                            aria-hidden='true'
-                        />
-                        Options
-                    </Menu.Button>
-                </div>
+            <Menu
+                as='div'
+                className={`relative  flex flex-col items-center ${className}`}
+            >
+                <Menu.Button className='group h-11 flex justify-center items-center px-4 py-2 bg-indigo-700 mx-2 rounded-md text-white font-bold'>
+                    <CogIcon
+                        className='h-5 mr-2 text-white group-hover:rotate-180 transition-all ease-in'
+                        aria-hidden='true'
+                    />
+                    Options
+                </Menu.Button>
                 <Transition
                     as={Fragment}
                     enter='transition ease-out duration-100'
@@ -157,7 +159,7 @@ export default function HomeDropDownOption({
                     leaveFrom='transform opacity-100 scale-100'
                     leaveTo='transform opacity-0 scale-95'
                 >
-                    <Menu.Items className='absolute flex flex-col-reverse -right-[2.25rem] bottom-[3.25rem] w-48 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
+                    <Menu.Items className='absolute flex flex-col-reverse bottom-[3.25rem] w-48 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
                         <Menu.Item>
                             {({ active }) => (
                                 <button

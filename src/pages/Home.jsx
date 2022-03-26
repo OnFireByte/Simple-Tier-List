@@ -176,63 +176,57 @@ export default function Home() {
                 console.log(err);
             });
     };
+    const [isDraging, setIsDraging] = useRef(false);
 
     return (
         <main>
             <h1 className='text-indigo-700 text-center my-2 text-[40px] font-bold'>
                 Simple Tier List
             </h1>
-            <DragDropContext onDragEnd={onDragEnd} type='item'>
-                <div>
-                    <div
-                        ref={ref}
-                        className='p-4 w-[60%]  mx-auto bg-white rounded-lg'
-                    >
-                        <Droppable droppableId='tiers' type='tier' key='tiers'>
-                            {(provided) => (
-                                <div
-                                    ref={provided.innerRef}
-                                    {...provided.droppableProps}
-                                >
-                                    {data.tiers.map(
-                                        (item, index) =>
-                                            item.value != '_placeholder' && (
-                                                <Tier
-                                                    tierData={item}
-                                                    index={index}
-                                                    data={data}
-                                                    key={index}
-                                                    onDeleteItem={onDeleteItem}
-                                                    onDeleteTier={onDeleteTier}
-                                                    onEditTier={onEditTier}
-                                                    onEditItem={onEditItem}
-                                                    forceUpdate={forceUpdate}
-                                                />
-                                            )
-                                    )}
+            <DragDropContext
+                onDragEnd={onDragEnd}
+                onDragStart={() => setIsDraging(true)}
+                type='item'
+            >
+                <section
+                    ref={ref}
+                    className='p-4 w-fit mx-auto bg-white rounded-lg'
+                >
+                    <Droppable droppableId='tiers' type='tier' key='tiers'>
+                        {(provided) => (
+                            <div
+                                ref={provided.innerRef}
+                                {...provided.droppableProps}
+                            >
+                                {data.tiers.map(
+                                    (item, index) =>
+                                        item.value != '_placeholder' && (
+                                            <Tier
+                                                tierData={item}
+                                                index={index}
+                                                data={data}
+                                                key={index}
+                                                onDeleteItem={onDeleteItem}
+                                                onDeleteTier={onDeleteTier}
+                                                onEditTier={onEditTier}
+                                                onEditItem={onEditItem}
+                                                forceUpdate={forceUpdate}
+                                            />
+                                        )
+                                )}
 
-                                    {provided.placeholder}
-                                </div>
-                            )}
-                        </Droppable>
-                    </div>
-                </div>
-                <div className='w-full flex justify-center'></div>
-                <AddNewTier
-                    newTierInput={newTierInput}
-                    setTierData={setTierData}
-                    tierData={tierData}
-                    randomColor={randomColor}
-                    setNewTierInput={setNewTierInput}
-                />
-
-                <div className='flex w-4/5 mx-auto items-center justify-center'>
-                    <PlaceholderField />
-                    <AddNewItem
-                        setData={setData}
-                        data={data}
-                        forceUpdate={forceUpdate}
-                        className='m-0'
+                                {provided.placeholder}
+                            </div>
+                        )}
+                    </Droppable>
+                </section>
+                <div className='px-5 w-[60%] flex flex-wrap lg:flex-nowrap justify-center lg:justify-start items-center mx-auto'>
+                    <AddNewTier
+                        newTierInput={newTierInput}
+                        setTierData={setTierData}
+                        tierData={tierData}
+                        randomColor={randomColor}
+                        setNewTierInput={setNewTierInput}
                     />
                     <HomeDropDownOption
                         onDownload={downloadTierList}
@@ -240,6 +234,17 @@ export default function Home() {
                         setTierData={setTierData}
                         data={data}
                         forceUpdate={forceUpdate}
+                        className='lg:ml-auto mb-5 lg:mb-0'
+                    />
+                </div>
+
+                <div className='flex w-4/5 mx-auto items-center flex-wrap lg:flex-nowrap justify-center'>
+                    <PlaceholderField />
+                    <AddNewItem
+                        setData={setData}
+                        data={data}
+                        forceUpdate={forceUpdate}
+                        className='m-0'
                     />
                 </div>
             </DragDropContext>
