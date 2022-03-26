@@ -176,18 +176,13 @@ export default function Home() {
                 console.log(err);
             });
     };
-    const [isDraging, setIsDraging] = useRef(false);
 
     return (
         <main>
             <h1 className='text-indigo-700 text-center my-2 text-[40px] font-bold'>
                 Simple Tier List
             </h1>
-            <DragDropContext
-                onDragEnd={onDragEnd}
-                onDragStart={() => setIsDraging(true)}
-                type='item'
-            >
+            <DragDropContext onDragEnd={onDragEnd} type='item'>
                 <section
                     ref={ref}
                     className='p-4 w-fit mx-auto bg-white rounded-lg'
