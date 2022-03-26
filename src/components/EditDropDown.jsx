@@ -5,6 +5,8 @@ import textColorCalculate from '@/modules/textColorCalculate';
 import { DebounceInput } from 'react-debounce-input';
 import { CogIcon, PencilIcon, TrashIcon } from '@heroicons/react/outline';
 import { HexColorPicker } from 'react-colorful';
+import fontSize from '../modules/fontSize';
+
 export default function EditDropDown({
     onDelete,
     onEdit,
@@ -122,6 +124,7 @@ function EditModal({ onEdit, forceUpdate, data, isOpen, closeModal, mode }) {
         closeModal();
         setTimeout(resetModal, 1000);
     };
+
     return (
         <Transition appear show={isOpen} as={Fragment}>
             <Dialog
@@ -228,8 +231,14 @@ function EditModal({ onEdit, forceUpdate, data, isOpen, closeModal, mode }) {
                                                     color: textColorCalculate(
                                                         color
                                                     ),
+                                                    fontSize:
+                                                        parseFloat(
+                                                            fontSize(name)
+                                                        ) *
+                                                            1.7 +
+                                                        'rem',
                                                 }}
-                                                className='text-[3rem] overflow-hidden text-center p-2 break-all shadow-lg font-bold w-40 h-40 flex items-center justify-center rounded-lg'
+                                                className='overflow-hidden select-none relative text-center p-2 break-all shadow-lg font-bold w-40 h-40 flex items-center justify-center rounded-lg'
                                             >
                                                 {name}
                                             </div>
