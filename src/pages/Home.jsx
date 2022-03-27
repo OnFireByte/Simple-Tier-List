@@ -257,7 +257,7 @@ export default function Home() {
             >
                 {(provided) => (
                     <div
-                        className='w-full min-h-[6rem] transition-all gap-2 px-1 rounded-md bg-gray-300 flex items-center flex-wrap'
+                        className='w-full min-h-[6rem] transition-all px-1 rounded-md bg-gray-300 flex items-center flex-wrap'
                         ref={provided.innerRef}
                         {...provided.droppableProps}
                     >
