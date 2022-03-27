@@ -27,10 +27,12 @@ export default function Tier({
                 <div
                     {...provided.draggableProps}
                     ref={provided.innerRef}
-                    style={{ width }}
                     className='p-1 mx-auto'
                 >
-                    <div className='p-2 rounded-lg bg-slate-200 flex flex-row items-center'>
+                    <div
+                        style={{ width }}
+                        className='p-2 rounded-lg bg-slate-200 flex flex-row items-center'
+                    >
                         <div
                             {...provided.dragHandleProps}
                             style={{
