@@ -53,7 +53,6 @@ export default function Tier({
                             droppableId={tierData.id}
                             key={tierData.id}
                             direction='horizontal'
-                            isCombineEnabled={true}
                             type='item'
                             className='overflow-scroll w-52'
                         >
