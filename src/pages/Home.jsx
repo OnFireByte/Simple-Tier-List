@@ -252,7 +252,6 @@ export default function Home() {
                 droppableId='_placeholder'
                 key='_placeholder'
                 direction='horizontal'
-                isCombineEnabled={true}
                 type='item'
             >
                 {(provided) => (
