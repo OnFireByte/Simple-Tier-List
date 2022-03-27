@@ -176,6 +176,7 @@ export default function Home() {
                 console.log(err);
             });
     };
+    const [tierWidth, setTierWidth] = useState('66vw');
 
     return (
         <main>
@@ -206,6 +207,7 @@ export default function Home() {
                                                 onEditTier={onEditTier}
                                                 onEditItem={onEditItem}
                                                 forceUpdate={forceUpdate}
+                                                width={tierWidth}
                                             />
                                         )
                                 )}
@@ -222,6 +224,16 @@ export default function Home() {
                         tierData={tierData}
                         randomColor={randomColor}
                         setNewTierInput={setNewTierInput}
+                    />
+                    <input
+                        type='range'
+                        name='tierWidth'
+                        min={50}
+                        max={90}
+                        step={1}
+                        className='w-36 mx-6 border-2 slider'
+                        value={parseFloat(tierWidth)}
+                        onChange={(e) => setTierWidth(`${e.target.value}vw`)}
                     />
                     <HomeDropDownOption
                         onDownload={downloadTierList}

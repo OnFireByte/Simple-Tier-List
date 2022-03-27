@@ -13,6 +13,7 @@ export default function Tier({
     onEditItem,
     onEditTier,
     forceUpdate,
+    width,
     // isDraging,
 }) {
     return (
@@ -26,7 +27,8 @@ export default function Tier({
                 <div
                     {...provided.draggableProps}
                     ref={provided.innerRef}
-                    className='p-1 w-[66vw] mx-auto'
+                    style={{ width }}
+                    className='p-1 mx-auto'
                 >
                     <div className='p-2 rounded-lg bg-slate-200 flex flex-row items-center'>
                         <div
@@ -58,7 +60,7 @@ export default function Tier({
                         >
                             {(provided) => (
                                 <div
-                                    className='px-1 h-24 tier-scrollbar grow transition-all rounded-md bg-slate-300 flex scroll items-center'
+                                    className='px-1 h-24 tier-scrollbar grow transition-all rounded-md bg-slate-300 flex items-center'
                                     ref={provided.innerRef}
                                     {...provided.droppableProps}
                                 >
