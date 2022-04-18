@@ -233,8 +233,9 @@ function EditModal({ onEdit, forceUpdate, data, isOpen, closeModal, mode }) {
                                                         ) *
                                                             1.7 +
                                                         'rem',
+                                                    wordBreak: 'break-word',
                                                 }}
-                                                className='overflow-hidden select-none relative text-center p-2 break-all shadow-lg font-bold w-40 h-40 flex items-center justify-center rounded-lg'
+                                                className='overflow-hidden select-none relative text-center p-2 shadow-lg font-bold w-40 h-40 flex items-center justify-center rounded-lg'
                                             >
                                                 {name}
                                             </div>

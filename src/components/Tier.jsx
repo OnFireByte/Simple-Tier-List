@@ -42,7 +42,10 @@ export default function Tier({
                             }}
                             className='group mr-2  flex-shrink-0 text-center font-bold relative h-24 w-24 rounded-md'
                         >
-                            <div className='select-none break-all overflow-hidden w-full h-full flex justify-center items-center p-1 mr-1'>
+                            <div
+                                style={{ wordBreak: 'break-word' }}
+                                className='select-noneoverflow-hidden w-full h-full flex justify-center items-center p-1 mr-1'
+                            >
                                 {tierData.value}
                             </div>
                             <EditDropDown
