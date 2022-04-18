@@ -62,11 +62,9 @@ export default function EditDropDown({
                                                         ? 'bg-indigo-600 text-white'
                                                         : 'text-gray-900'
                                                 } p-1 rounded-md`}
+                                                onClick={openModal}
                                             >
-                                                <PencilIcon
-                                                    className='h-4'
-                                                    onClick={openModal}
-                                                />
+                                                <PencilIcon className='h-4 mx-auto' />
                                             </div>
                                         )}
                                     </Menu.Item>
@@ -78,13 +76,11 @@ export default function EditDropDown({
                                                         ? 'bg-red-700 text-white'
                                                         : 'text-gray-900'
                                                 } p-1 rounded-md`}
+                                                onClick={() => {
+                                                    onDelete(data.id);
+                                                }}
                                             >
-                                                <TrashIcon
-                                                    className='h-4'
-                                                    onClick={() => {
-                                                        onDelete(data.id);
-                                                    }}
-                                                />
+                                                <TrashIcon className='h-4 mx-auto' />
                                             </div>
                                         )}
                                     </Menu.Item>
