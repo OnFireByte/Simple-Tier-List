@@ -32,6 +32,8 @@ export default function AddNewTier({
                             textColor: textColorCalculate(color),
                         },
                     ]);
+
+                    setColor(randomColor());
                 }
 
                 setNewTierInput('');
