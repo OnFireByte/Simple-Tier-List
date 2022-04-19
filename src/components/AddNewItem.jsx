@@ -27,6 +27,7 @@ export default function AddNewItem({ setData, data, forceUpdate }) {
                 <div className='flex h-full flex-col gap-3 justify-center items-center'>
                     <input
                         type='text'
+                        maxLength='30'
                         placeholder='New Item'
                         value={newValInput}
                         onChange={(e) => setNewValInput(e.target.value)}

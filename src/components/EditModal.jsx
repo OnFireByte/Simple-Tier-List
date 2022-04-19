@@ -108,7 +108,7 @@ export default function EditModal({
                                     </span>
                                     <input
                                         type='text'
-                                        maxLength='20'
+                                        maxLength='30'
                                         value={name}
                                         onChange={(e) =>
                                             setName(e.target.value)

@@ -41,6 +41,7 @@ export default function AddNewTier({
             <div className='p-0 flex flex-wrap items-center justify-center gap-6'>
                 <input
                     type='text'
+                    maxLength='30'
                     placeholder='New Tier'
                     value={newTierInput}
                     onChange={(e) => setNewTierInput(e.target.value)}
